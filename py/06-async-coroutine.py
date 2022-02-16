@@ -2,9 +2,10 @@ import asyncio
 import random
 
 async def call_web_api(url):
-    print(f'send a request {url}')
-    await asyncio.sleep(random.random())
-    print(f'got a response:{url}')
+    sleeptime = random.randrange(1,5)
+    print(f'send a request {url} {sleeptime=}')
+    await asyncio.sleep(sleeptime)
+    print(f'got a response:{url} {sleeptime=}')
     return url
 
 async def async_download(url):
