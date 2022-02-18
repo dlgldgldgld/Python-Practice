@@ -21,6 +21,25 @@ Python 구문 정리용
 ## 06-async-coroutine.py
 - asyncio, coroutine 예제
 
+## 07-unit-test
+- 구현 방법
+  1. test로 시작하는 이름으로 테스트 모듈을 생성
+  2. unittest.TestCase 클래스의 서브클래스를 작성
+  3. 내부에는 test로 시작하는 이름으로 테스트 메서드 구현.
+  4. assert를 통해 결과값 체크 가능.
+     1. assertEqual, asserTrue, asserIsNone, assertIn, assertAlmostEqual 등 지원.
+  5. 전처리 후처리는 setup(), tearDown() function을 구현하면 됨.
+- test 결과 확인 방법
+  - python -m unittest -v : 항목으로 test 가능.
+    - 특정 test만 하려면 뒤에 패키지-모듈-클래스 순으로 입력 
+      - ex1 ) `python -m unittest -v test.test_api.BuildUrl.test_build_url`
+      - ex2 ) `python -m unittest -v test.test_api.BuildUrl`
+      - ex3 ) `python -m unittest -v test.test_api`
+    - pattern 형식으로 적용하려면 아래의 코드 수행
+      - `python -m unittest discover -s test -p test_c*.py -v` : test 모듈의 test_c*.py 패턴만 수행함.
+  - @unittest.expectedFailure : 실패하는 test는 이 decorator를 추가하면 pass 가능.
+- 더 자세한 내용은 [https://docs.python.org/3/library/unittest.html#organizing-test-code](https://docs.python.org/3/library/unittest.html#organizing-test-code) 참조
+
 # Python package 관련 정리
 ## 01. pip-command
 - pip install --upgarde pip : package update

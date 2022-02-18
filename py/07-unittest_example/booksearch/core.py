@@ -18,7 +18,7 @@ class Book:
             thumbnail = get_data(url)
             ext = imghdr.what(None, h=thumbnail)
 
-            base = pathlib.Pathprefix / f'{self.id}_{kind}'
+            base = pathlib.Path(prefix) / f'{self.id}_{kind}'
             filename = base.with_suffix(f'.{ext}')
             filename.write_bytes(thumbnail)
             paths.append(filename)
