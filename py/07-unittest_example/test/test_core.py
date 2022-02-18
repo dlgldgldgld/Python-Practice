@@ -1,6 +1,7 @@
 import pathlib
 import unittest
 from tempfile import TemporaryDirectory
+from unittest.mock import patch 
 
 THUMBNAIL_URL = (
     'http://books.google.com/books/content'
@@ -26,6 +27,24 @@ class SaveThumbnailsTest(unittest.TestCase):
 
         filename = book.save_thumbnails(self.tmp.name)[0]
         self.assertTrue(pathlib.Path(filename).exists())
+
+    @patch ('booksearch.core.get_data')
+    def test_save_thumbnails(self, mock_get_data):
+        from booksearch.core import Book
+        data_path = pathlib.Path(__file__).with_name('data')
+        mock_get_data.return_value = (
+            data_path / 'puFBDwAAQBAJ_thumbnail.jpeg').read_bytes()
+
+        book = Book({'id': '', 'volumeInfo' : {
+            'imageLinks': {
+                'thumbnail': THUMBNAIL_URL
+            }}})
+        
+        filename = book.save_thumbnails(self.tmp.name)[0]
+        mock_get_data.assert_called_with(THUMBNAIL_URL)
+
+        self.assertEqual( mock_get_data.return_value, filename.read_bytes())
+
 
 if __name__ == '__main__' :
     unittest.main()
