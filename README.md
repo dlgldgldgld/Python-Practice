@@ -40,6 +40,11 @@ Python 구문 정리용
   - @unittest.expectedFailure : 실패하는 test는 이 decorator를 추가하면 pass 가능.
 - 더 자세한 내용은 [https://docs.python.org/3/library/unittest.html#organizing-test-code](https://docs.python.org/3/library/unittest.html#organizing-test-code) 참조
 
+# Numpy
+## Numpy 사용 이유
+- Python Array는 메모리 사용이 효율적이지 못하다.
+- Numypt는 multi dementions 변수를 다룰때 빠른 속도를 위해 사용한다.
+
 # Python package 관련 정리
 ## 01. pip-command
 - pip install --upgarde pip : package update
