@@ -1,6 +1,9 @@
 # Python-Practice
 Python 구문 정리용
 
+[ Reference ]
+- 효율적 개발로 이끄는 알고리즘 ( https://github.com/Jpub/fulfillPython ) 
+
 ## 01-LazyProperty.py
 - LazyProperty : 최초에 한번 수행된 이후에는 다시 계산을 하지 않는 Class Property
 
