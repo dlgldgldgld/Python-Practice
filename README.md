@@ -58,3 +58,39 @@ Python 구문 정리용
 - No plan
 
 
+# argparse
+## 1. 기본 사용 코드 예제
+```python
+import argparse
+
+parser = argparse.ArgumentParser(description='Process some integers.') # 1. ArgumentParser 생성
+parser.add_argument('integers', metavar='N', type=int, nargs='+',
+                    help='an integer for the accumulator') # 2. add_argument 함수를 통해 argument  추가.
+parser.add_argument('--sum', dest='accumulate', action='store_const',
+                    const=sum, default=max,
+                    help='sum the integers (default: find the max)')
+
+args = parser.parse_args() # 3. 인자를 받아옴.
+print(args.accumulate(args.integers)) # 4. 인자값 사용
+```
+
+## 2. parse_args(args=None, namespace=None) method
+- 인자 설명
+  - args - List of strings to parse. The default is taken from **sys.argv**.
+  - namespace - An object to take the attributes. The default is a new empty Namespace object.
+
+- cli를 검사하고 올바른 값으로 인자를 convert 해주는 함수이다.
+  ```python
+  args = parser.parse_args()
+  args.target
+  args.env
+  ```
+- 인자로 넘기는 값이 유효한지 체크할때도 사용이 가능하다.
+  ```python
+  parser.add_argument('--foo')
+  parser.parse_args(['spam']) # error occur.
+  ```
+- **리스트로 감싸서 사용해야 함.**
+
+## 3. add_argument
+- doc : https://docs.python.org/3/library/argparse.html#the-add-argument-method
