@@ -94,3 +94,37 @@ print(args.accumulate(args.integers)) # 4. 인자값 사용
 
 ## 3. add_argument
 - doc : https://docs.python.org/3/library/argparse.html#the-add-argument-method
+- positional argument : 무조건 들어가야하는 argument를 뜻함.
+  - 예를 들어 아래의 코드에서는 무조건 인자값이 포함되어야 함.
+    ```python
+    parser = argparse.ArgumentParser(prog='PROG')
+    parser.add_arguments('bar'. type=int)
+    ```
+    > python example.py 1 <- 1이 bar 자리가 됨.
+- optional argument : 들어가도되고, 안들어가도 되는 argument, 선언시 앞에 `-`을 붙인다.
+- action : cli argument에 action을 부여한다는 뜻으로, default로는 `store`가 부여된다. add_arguement에 keyword argument로 부여가 가능하다.
+  - store : argument에 값을 저장하겠다는 의미. ex) --foo 1 > Namespace(foo = '1')
+  - store_const : const 옵션으로 값을 지정해주겠다는 의미이다. 예를 들어 `--foo` 라고 argument를 넣어주기만 한다면 const의 값을 넣어주겠다는 뜻.
+    ``` python
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--foo', action='store_const', const=42)
+    parser.parse_args(['--foo'])
+    >>> Namespace(foo=42)
+    parser.parse_args(['--foo', '1'])
+    >>> 지정하는 argument라고 에러가 발생함.
+    ```
+ - store_true, store_false : argument 설정시 true나 false를 저장하는 action. args를 전달하지 않는다면 false나 true가 설정된다.
+ - append : list 형식으로 값을 append하는 action.
+   ```python
+   parser.add_argument('--foo', action='append')
+   parser.parse_args('--foo 1 --foo 2'.split())
+   >> Namespace(foo=['1', '2'])
+   ```
+ - version : 흔히 library에 --version을 입력할때 나오는 구문과 동일하다고 생각하면 됨. 아래와 같이 사용 가능함.
+    ``` python
+    import argparse
+    parser = argparse.ArgumentParser(prog='PROG')
+    parser.add_argument('--version', action='version', version='%(prog)s 2.0')
+    parser.parse_args(['--version'])
+    >> PROG 2.0
+    ```
