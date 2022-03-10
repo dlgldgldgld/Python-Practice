@@ -149,3 +149,6 @@ print(args.accumulate(args.integers)) # 4. 인자값 사용
     parser.parse_args(['--version'])
     >> PROG 2.0
     ```
+
+## 4. itertools 
+- iterator를 사용할때 itertools를 쓰면 이터레이터간 연결, filter, 조합등을 쉽게 할 수 있다.
